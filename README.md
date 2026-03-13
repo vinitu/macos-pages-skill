@@ -1,4 +1,4 @@
-# Apple Pages Skill
+# macOS Pages Skill
 
 This repo stores a skill for Apple Pages.app integration on macOS via AppleScript.
 
@@ -7,13 +7,13 @@ This repo stores a skill for Apple Pages.app integration on macOS via AppleScrip
 Install with `skills.sh`:
 
 ```bash
-skills.sh add vinitu/apple-pages-skill
+skills.sh add vinitu/macos-pages-skill
 ```
 
 If you use the npm installer instead:
 
 ```bash
-npx skills add vinitu/apple-pages-skill
+npx skills add vinitu/macos-pages-skill
 ```
 
 ## Scope

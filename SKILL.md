@@ -1,9 +1,9 @@
 ---
-name: apple-pages
+name: macos-pages
 description: Create, read, edit, and export Apple Pages documents on macOS. Use for document creation, text formatting, table management, and exporting to PDF/Word/plain text. Triggers on queries about Pages, document editing, word processing, or creating formatted documents on Mac.
 ---
 
-# Apple Pages Integration
+# macOS Pages Integration
 
 Create, read, edit, and export Apple Pages documents using AppleScript (`osascript`) on macOS.
 

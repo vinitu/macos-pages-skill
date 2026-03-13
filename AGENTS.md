@@ -1,6 +1,6 @@
 # Repo Guide
 
-This repo stores a skill for Apple Pages.app integration on macOS.
+This repo stores a skill for macOS Pages.app integration.
 
 ## Goal
 
