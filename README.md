@@ -4,16 +4,14 @@ This repo stores a skill for Apple Pages.app integration on macOS via AppleScrip
 
 ## Installation
 
-Install with `skills.sh`:
+```bash
+npx skills add vinitu/macos-pages-skill
+```
+
+Or with [skills.sh](https://skills.sh):
 
 ```bash
 skills.sh add vinitu/macos-pages-skill
-```
-
-If you use the npm installer instead:
-
-```bash
-npx skills add vinitu/macos-pages-skill
 ```
 
 ## Scope
@@ -32,24 +30,20 @@ npx skills add vinitu/macos-pages-skill
 
 ## How To Use
 
+From the skill directory (or path where scripts are installed):
+
 ```bash
-# Create a new document
-osascript -e 'tell application "Pages" to make new document'
-
-# Get text from the front document
-osascript -e 'tell application "Pages" to return body text of front document'
-
-# Export as PDF
-osascript -e '
-tell application "Pages"
-  export front document to POSIX file "/tmp/output.pdf" as PDF
-end tell'
-
-# Close saving changes
-osascript -e 'tell application "Pages" to close front document saving yes'
+# Create new document
+osascript scripts/document/create.applescript
+# Get body text of front document
+osascript scripts/document/get-text.applescript
+# Export front document to PDF
+osascript scripts/document/export-pdf.applescript "/tmp/output.pdf"
+# Close front document (yes=save, no=discard, ask=prompt)
+osascript scripts/document/close.applescript yes
 ```
 
-For the full command set and examples, see `SKILL.md`.
+For the full command set and examples, see `SKILL.md` and scripts under `scripts/`.
 
 ## Troubleshooting
 
