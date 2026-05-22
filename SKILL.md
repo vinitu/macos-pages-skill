@@ -22,6 +22,7 @@ Do not call `scripts/applescripts` directly.
 Run commands from `scripts/commands`:
 
 - `scripts/commands/document/*`
+- `scripts/commands/table/*`
 
 ## Commands
 
@@ -42,6 +43,32 @@ scripts/commands/document/remove-password.sh
 scripts/commands/document/save.sh
 scripts/commands/document/set-password.sh
 ```
+
+### Table
+
+```bash
+scripts/commands/table/clear-range.sh
+scripts/commands/table/merge-range.sh
+scripts/commands/table/sort.sh
+scripts/commands/table/unmerge-range.sh
+```
+
+## JSON Contract
+
+Document object:
+
+- `name` (string)
+- `body` (string)
+
+Table cell object:
+
+- `row` (integer, 0-based)
+- `column` (integer, 0-based)
+- `value` (string)
+
+Scalar envelopes:
+
+- `success/failure`: `{"success": true/false, "error": "..."}`
 
 ## Safety Boundaries
 

@@ -33,6 +33,7 @@ scripts/commands/<entity>/<action>.sh [args...]
 ## Backend Map
 
 - `scripts/commands/document/*` → AppleScript in `scripts/applescripts/document/*`
+- `scripts/commands/table/*` → AppleScript in `scripts/applescripts/table/*`
 
 ## Command Surface
 
@@ -51,6 +52,13 @@ Document:
 - `scripts/commands/document/remove-password.sh`
 - `scripts/commands/document/save.sh`
 - `scripts/commands/document/set-password.sh`
+
+Table:
+
+- `scripts/commands/table/clear-range.sh`
+- `scripts/commands/table/merge-range.sh`
+- `scripts/commands/table/sort.sh`
+- `scripts/commands/table/unmerge-range.sh`
 
 ## Validation
 
