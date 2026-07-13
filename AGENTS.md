@@ -2,6 +2,12 @@
 
 This repo stores a skill for macOS Pages.app integration.
 
+## Public interface and internal backend
+
+- `scripts/commands/` is the only public command surface. Run commands from the repo root with paths like `scripts/commands/<entity>/<action>.sh`.
+- `scripts/applescripts/` is the internal backend. Do not call AppleScript files directly from skill instructions.
+- Only commands listed in `SKILL.md` are public. Other scripts may exist for internal use or legacy cleanup.
+
 ## Goal
 
 - Document AppleScript commands for Pages.app accurately.
@@ -14,8 +20,8 @@ This repo stores a skill for macOS Pages.app integration.
 - `SKILL.md`: the skill contract and usage instructions for agents.
 - `README.md`: public project overview and installation notes.
 - `Makefile`: targets `dictionary-pages`, `check`, `compile`, `test` (test-dictionary + test-smoke).
-- `scripts/document/name.applescript`, `open.applescript`, `create.applescript`, `list.applescript`, `get-text.applescript`, `get-properties.applescript`, `count-pages.applescript`, `add-text.applescript`, `export-pdf.applescript`, `close.applescript`, `save.applescript`, `set-password.applescript`, `remove-password.applescript`.
-- `scripts/table/clear-range.applescript`, `merge-range.applescript`, `unmerge-range.applescript`, `sort.applescript`.
+- `scripts/applescripts/document/name.applescript`, `open.applescript`, `create.applescript`, `list.applescript`, `get-text.applescript`, `get-properties.applescript`, `count-pages.applescript`, `add-text.applescript`, `export-pdf.applescript`, `close.applescript`, `save.applescript`, `set-password.applescript`, `remove-password.applescript`.
+- `scripts/applescripts/table/clear-range.applescript`, `merge-range.applescript`, `unmerge-range.applescript`, `sort.applescript`.
 - `tests/dictionary_contract.sh`: contract test against Pages scripting dictionary.
 - `tests/smoke_pages.sh`: smoke test for script layer (skips when Pages not available).
 - `.github/workflows/ci-pr.yml`: PR validation, auto-merge, version bump, tag, and release flow.
