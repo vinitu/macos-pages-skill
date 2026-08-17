@@ -14,18 +14,45 @@ This repo stores a skill for macOS Pages.app integration.
 - Prefer runnable examples over long prose.
 - Never modify user documents without explicit approval.
 
+## Source of truth
+
+- `make dictionary-pages` / `make dictionary-standard`
+- Live checks with `osascript` against Pages.app
+- Raw dictionary commands live only in this file and in the `Makefile`.
+
 ## Repo Layout
 
 - `AGENTS.md`: this file; rules for coding agents.
 - `SKILL.md`: the skill contract and usage instructions for agents.
 - `README.md`: public project overview and installation notes.
 - `Makefile`: targets `dictionary-pages`, `check`, `compile`, `test` (test-dictionary + test-smoke).
+- `scripts/commands/_lib/common.sh`: shared shell helpers (`json_fail`, `json_ok`, `json_wrap`, `require_arg`, `run_backend`).
+- `scripts/commands/document/*.sh`: public document command wrappers.
+- `scripts/commands/table/*.sh`: public table command wrappers.
 - `scripts/applescripts/document/name.applescript`, `open.applescript`, `create.applescript`, `list.applescript`, `get-text.applescript`, `get-properties.applescript`, `count-pages.applescript`, `add-text.applescript`, `export-pdf.applescript`, `close.applescript`, `save.applescript`, `set-password.applescript`, `remove-password.applescript`.
 - `scripts/applescripts/table/clear-range.applescript`, `merge-range.applescript`, `unmerge-range.applescript`, `sort.applescript`.
 - `tests/dictionary_contract.sh`: contract test against Pages scripting dictionary.
 - `tests/smoke_pages.sh`: smoke test for script layer (skips when Pages not available).
 - `.github/workflows/ci-pr.yml`: PR validation, auto-merge, version bump, tag, and release flow.
 - `.github/workflows/ci-main.yml`: main-branch validation, patch tag, and release flow.
+
+## Pitfalls / Env limits
+
+- Pages automation requires Automation permission (System Settings → Privacy & Security → Automation) for the terminal.
+- `make compile` only runs `osacompile` (syntax check) and `bash -n`; it does not exercise live Pages commands.
+- Smoke and dictionary tests skip when Pages.app is not available (CI without macOS).
+- AppleScript backends return plain strings; `run_backend` wraps them in the `{"success":true,"data":"..."}` envelope via `json_wrap` using `jq`.
+- Table coordinates in AppleScript backends are 1-based; the public JSON contract documents 0-based `row`/`column`.
+
+## Safety rules
+
+- Treat Pages documents as real user data. Never overwrite, delete, close, export, or password-protect without explicit user approval.
+- For any test or smoke run that creates documents, use the `CodexTest_` name prefix (for example `CodexTest_SmokeDoc`) and clean up (close without saving) afterwards.
+- Write commands require approval before running against real user documents:
+  - document: `create`, `add-text`, `save`, `set-password`, `remove-password`, `close`, `export-pdf`
+  - table: `clear-range`, `merge-range`, `unmerge-range`, `sort`
+- Read commands (`name`, `list`, `get-text`, `get-properties`, `count-pages`) are safe by default.
+- `set-password` and `remove-password` mutate document security; always confirm with the user first.
 
 ## Validation
 
