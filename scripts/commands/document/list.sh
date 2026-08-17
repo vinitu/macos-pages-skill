@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+# Output: JSON envelope.
+# Example: scripts/commands/document/list.sh
+#   {"success":true,"data":"My Document\n"}
 set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../_lib/common.sh"
-run_backend document list "$@"
+
+usage() { echo "Usage: $(basename "$0")" >&2; }
+
+main() {
+  run_backend document list "$@"
+}
+
+main "$@"
